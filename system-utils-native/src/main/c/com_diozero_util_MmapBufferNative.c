@@ -34,11 +34,13 @@ JNIEXPORT jobject JNICALL Java_com_diozero_util_MmapBufferNative_createMmapBuffe
 	int fd = open(filename, O_RDWR | O_SYNC);
 	if (fd < 0) {
 		// TODO Raise error
+		printf("failed to open %s", filename);
 		return NULL;
 	}
 	void* map_ptr = initMapMem(fd, offset, length);
 	if (map_ptr == MAP_FAILED) {
 		// TODO Raise error
+		printf("failed to init mmap at address %#010x", offset);
 		return NULL;
 	}
 
